@@ -1,0 +1,3 @@
+[submodule "balanceofsatoshis"]
+	path = balanceofsatoshis
+	url = https://github.com/alexbosworth/balanceofsatoshis.git

@@ -1,0 +1,91 @@
+id: balanceofsatoshis 
+title: Balance of Satoshis
+version: 11.64.2
+release-notes: Upgrade to EmbassyOS v0.3.0
+license: mit
+wrapper-repo: "https://github.com/cryptodread/balanceofsatoshis-wrapper"
+upstream-repo: "https://github.com/alexbosworth/balanceofsatoshis"
+support-site: "https://github.com/alexbosworth/balanceofsatoshis/issues"
+marketing-site: "https://github.com/alexbosworth"
+donation-url: "https://yalls.org/hashcash/7bff5e4f-4534-4cca-8daa-3d5a3c239919/"
+build: ["make"]
+description:
+  short: Balance of Satoshis - Tool for working with the balance of your satoshis on LND
+  long: |
+    Balance of Satoshis - Tool for working with the balance of your satoshis on Lightning Network Daemon, using commands for working with LND balances.
+assets:
+  license: LICENSE
+  icon: icon.png
+  instructions: docs/instructions.md
+  docker-images: image.tar
+main:
+  type: docker
+  image: main
+  entrypoint: "docker_entrypoint.sh"
+  args: []
+  mounts:
+    lnd: /mnt/lnd
+    main: /root
+health-checks: {}
+config: ~
+volumes:
+  main:
+    type: data
+  compat:
+    type: assets 
+  utils:
+    type: assets
+  lnd:
+    type: pointer
+    package-id: lnd
+    volume-id: main
+    path: "/public"
+    readonly: true
+interfaces:
+  main:
+    name: Network Interface
+    description: Specifies the interface to listen on for HTTP connections.
+    tor-config:
+      port-mapping:
+        80: "3000"
+    lan-config:
+      443:
+        ssl: true
+        internal: 3000
+    ui: true
+    protocols:
+      - tcp
+      - http
+dependencies:
+  lnd:
+    version: ">=0.11.0 <0.15.0"
+    requirement:
+      type: required
+    config: ~
+backup:
+  create:
+    type: docker
+    image: compat
+    system: true 
+    entrypoint: compat 
+    args: 
+      - duplicity
+      - create
+      - /mnt/backup
+      - /root/data
+    mounts:
+      BACKUP: "/mnt/backup" 
+      main: "/root/data"
+  restore:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: compat
+    args:
+      - duplicity
+      - restore
+      - /root/data
+      - /mnt/backup
+    mounts:
+      BACKUP: "/mnt/backup"
+      main: "/root/data"
