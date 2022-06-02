@@ -52,7 +52,7 @@ interfaces:
       443:
         ssl: true
         internal: 3000
-    ui: true
+    ui: false
     protocols:
       - tcp
       - http
