@@ -10,9 +10,8 @@ marketing-site: "https://github.com/alexbosworth"
 donation-url: "https://yalls.org/hashcash/7bff5e4f-4534-4cca-8daa-3d5a3c239919/"
 build: ["make"]
 description:
-  short: Balance of Satoshis - Tool for working with the balance of your satoshis on LND
-  long: |
-    Balance of Satoshis - Tool for working with the balance of your satoshis on Lightning Network Daemon, using commands for working with LND balances.
+  short: A Tool for working with the balance of your satoshis on LND
+  long: A command line tool for working with the balance of your satoshis on your self-hosted Lightning Network Daemon, using the command line for working with LND balances. You can open balanced channels with other participants, and manually monitor your channel fees and HTLCs.
 assets:
   license: LICENSE
   icon: icon.png
