@@ -2,23 +2,13 @@
 
 set -a
 
-# Display current installed version and help
-echo "Balance of Satoshis - Version: "
-bos --version
-echo "Configuring Balance of Satoshis..."
-mkdir -p /root/.bos/embassy
-chmod -R a+x /root/.bos
-mv /credentials.json /root/.bos/embassy/credentials.json
-chmod a+x /root/.bos/embassy/credentials.json
-echo "Starting xterm UI..."
-cd /usr/local/lib
-serve --cors --single --no-clipboard --no-compression --symlinks
-
-echo "Checking for peers..."
-
-# Starting command line
-while true;
-do bos peers;
-sleep 20000;
-done
-
+useradd -m -s /bin/bash bos
+echo bos:embassy | chpasswd
+usermod -a -G root bos
+mkdir -p /home/bos/.bos/embassy
+chmod -R a+x /home/bos/.bos
+mv /credentials.json /home/bos/.bos/embassy/credentials.json
+chmod a+x /home/bos/.bos/embassy/credentials.json
+chmod 640 /mnt/lnd/admin.macaroon
+echo 'export BOS_DEFAULT_SAVED_NODE=embassy' >> /home/bos/.bashrc
+wetty --title Balance of Satoshi for Embassy
