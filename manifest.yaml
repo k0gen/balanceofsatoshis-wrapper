@@ -63,7 +63,7 @@ dependencies:
     config: ~
 alerts:
   install: |
-    READ CAREFULLY! This is command-line ONLY tool. You will be required to use an SSH Key to gain access to the command line. Please refer to the Using SSH guide (https://start9.com/latest/user-manual/ssh) for setup instructions.
+    READ CAREFULLY! This is command-line ONLY tool. Web based terminal is available for you to use on both local and onion interfaces. Don't share those links to anyone! 
 backup:
   create:
     type: docker
