@@ -9,6 +9,7 @@ RUN npm install --global wetty
 WORKDIR /
 
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
+ADD assets/motd /etc/motd
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 ADD assets/utils/check-web.sh /usr/local/bin/check-web.sh
 RUN chmod +x /usr/local/bin/check-web.sh
