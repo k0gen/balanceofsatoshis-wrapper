@@ -3,6 +3,9 @@ ENV BOS_DEFAULT_SAVED_NODE=embassy
 ADD . /
 RUN cd balanceofsatoshis && npm i -g balanceofsatoshis
 
+RUN apt-get update && \
+    apt-get install -y screen
+
 WORKDIR /usr/local/lib/
 RUN npm install --global wetty
 
